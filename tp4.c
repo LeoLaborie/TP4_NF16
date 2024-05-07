@@ -1,4 +1,5 @@
 #include "tp4.h"
+#include <stdlib.h>
 
 T_Sommet *creerSommet(int element){
     T_Sommet *sommet;
@@ -10,7 +11,49 @@ T_Sommet *creerSommet(int element){
 }
 
 T_Arbre insererElement(T_Arbre abr, int element){
-    
+    T_Sommet *y;
+    T_Sommet *x = abr;
+    while (x!=NULL){
+        y = x;
+        if (x->borneInf > element){
+            x = x->filsGauche;
+        }
+        else if (x->borneSup < element){
+            x = x->filsDroit;
+        }
+        else {
+            if (element == x->borneInf - 1) x->borneInf = element;
+            if (element == x->borneSup + 1) x->borneSup = element;
+            return abr;
+        }
+    }
+    if (y == NULL) return creerSommet(element);
+    else if (element < y->borneInf) y->filsGauche = creerSommet(element);
+    else if (element > y->borneSup) y->filsDroit = creerSommet(element);
+    return abr;
+}
+
+
+
+
+
+
+void afficherSommets(T_Arbre abr) {
+    if (abr != NULL){
+        afficherSommets(abr->filsGauche);
+        printf("[%d ;%d], ",abr->borneInf, abr->borneSup);
+        afficherSommets(abr->filsDroit);
+    }
+}
+
+void afficherElements(T_Arbre abr){
+    if (abr != NULL){
+        afficherElements(abr->filsGauche);
+        for (int i = abr->borneInf; i<=abr->borneSup; i++){
+            printf("%d, ", i);
+        }
+        afficherElements(abr->filsDroit);
+    }
 }
 
 bool validiteElements(int nombre_elements){
