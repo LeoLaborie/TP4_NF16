@@ -23,3 +23,7 @@ void afficherElements(T_Arbre abr);
 T_Arbre supprimerElement(T_Arbre abr, int element);
 
 void tailleMemoire(T_Arbre abr);
+
+bool validiteSommet(int element);
+
+bool validiteElements(int nombre_elements);
