@@ -67,5 +67,31 @@ bool validiteElements(int nombre_elements){
     }else{
         inserer = false;
     }
+    
+    return inserer;
+}
 
+bool validiteSommet(int element){
+    
+    bool creer;
+    creer = true;
+    if(element==0 || element>0 || element<0){
+        creer = true;
+    }else{
+        creer = false;
+    }
+    
+    return creer;
+
+}
+
+bool arbreNonVide(T_Arbre abr){
+    
+    bool vide;
+    vide = false;
+    if(abr == NULL){
+        vide = true;
+    }else{
+        vide = false;
+    }
 }
