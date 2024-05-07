@@ -27,3 +27,5 @@ void tailleMemoire(T_Arbre abr);
 bool validiteSommet(int element);
 
 bool validiteElements(int nombre_elements);
+
+bool arbreNonVide(T_Arbre abr);
