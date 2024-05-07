@@ -1,4 +1,6 @@
-Typedef struct Sommet{
+#include <stdbool.h>
+
+typedef struct Sommet{
     
 int borneInf;
 int borneSup;
@@ -8,7 +10,7 @@ struct Sommet* filsDroit;
 
 }T_Sommet;
 
-Typedef T_Sommet* T_Arbre;
+typedef T_Sommet* T_Arbre;
 
 T_Sommet *creerSommet(int element);
 

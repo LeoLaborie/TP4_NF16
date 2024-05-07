@@ -34,10 +34,6 @@ T_Arbre insererElement(T_Arbre abr, int element){
 }
 
 
-
-
-
-
 void afficherSommets(T_Arbre abr) {
     if (abr != NULL){
         afficherSommets(abr->filsGauche);
@@ -86,12 +82,25 @@ bool validiteSommet(int element){
 }
 
 bool arbreNonVide(T_Arbre abr){
-    
-    bool vide;
-    vide = false;
-    if(abr == NULL){
-        vide = true;
-    }else{
-        vide = false;
+    return (abr != NULL);
+}
+
+T_Arbre supprimerElement(T_Arbre abr, int element){
+    T_Sommet *x = abr;
+    if (x == NULL) return abr;
+    else if (element < x->borneInf) supprimerElement(x->filsGauche, element);
+    else if (element > x->borneSup) supprimerElement(x->filsDroit, element);
+    else if (element <= x->borneSup && element >= x->borneInf){
+        if (element == x->borneInf) x->borneInf++;
+        else if (element == x->borneSup) x->borneInf--;
+        else {
+            int bornesup = x->borneSup;
+            x->borneSup = element-1;
+            T_Sommet* new_sommet = creerSommet(element+1);
+            new_sommet->borneSup = bornesup;
+            new_sommet->filsDroit = x->filsDroit;
+            x->filsDroit = new_sommet;
+        }
     }
+    return abr;
 }
