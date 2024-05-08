@@ -41,3 +41,5 @@ size_t calculeTailleNoeud(T_Sommet* sommet);
 size_t calculeTailleArbre(T_Arbre abr);
 
 void tailleMemoire(T_Arbre abr);
+
+#endif
