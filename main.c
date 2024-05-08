@@ -37,7 +37,7 @@ int main(){
                 printf("Veuillez saisir l'element du sommet a creer\n");
                 scanf("%d", &element);
                 creer = validiteSommet(element);
-                if creer==true{
+                if (creer == true){
                     insererElement(nombre_elements);
                 }else{
                     printf("Vous ne pouvez construire un sommet qu'avec un element corresppondant a un nombre entier");
@@ -49,7 +49,7 @@ int main(){
                 scanf("%d", &nombre_elements);
                 validiteElements(nombre_elements);
                 
-                if inserer==true{
+                if (inserer == true){
                     insererElement(nombre_elements);
                 }else{
                     printf("Vous ne pouvez construire un arbre qu'avec un nombre d'elements positif");
@@ -62,7 +62,7 @@ int main(){
                 scanf("%d", &element_recherche);
                 vide = arbreNonVide(arbre);
                 rechercher = validiteSommet(element_recherche);
-                if(vide=false && rechercher=true){
+                if(vide == false && rechercher == true){
                     rechercherElement(arbre, element_recherche);
                 }else{
                     printf("Veuillez dans un premier temps creer un arbre");
@@ -70,7 +70,7 @@ int main(){
                 break;
             case 4: //Afficher tous les sommets
                 vide = arbreNonVide(arbre);
-                if(vide=false){
+                if(vide == false){
                     afficherSommets(arbre);
                 }else{
                     printf("Veuillez dans un premier temps creer un arbre");
@@ -79,7 +79,7 @@ int main(){
 
             case 5: //Afficher tous les elements
                 vide = arbreNonVide(arbre);
-                if(vide=false){
+                if(vide == false){
                     afficherElements(arbre);
                 }else{
                     printf("Veuillez dans un premier temps creer un arbre");
@@ -90,7 +90,7 @@ int main(){
                 scanf("%d", &element_suppression);
                 vide = arbreNonVide(arbre);
                 supprimmer = validiteSommet(element_recherche);
-                if(vide=false && supprimer=true){
+                if(vide == false && supprimer == true){
                     supprimerElement(arbre, element_suppression);
                 }else{
                     printf("Veuillez dans un premier temps creer un arbre");
