@@ -71,7 +71,15 @@ int main(){
 
                 break;
             case 6: //Supprimer un element
-
+                printf("Veuillez saisir l'element que vous souhaitez supprimer\n");
+                scanf("%d", &element_suppression);
+                vide = arbreNonVide(arbre);
+                supprimmer = validiteSommet(element_recherche);
+                if(vide=false && supprimer=true){
+                    supprimerElement(arbre, element_suppression);
+                }else{
+                    printf("Veuillez dans un premier temps creer un arbre");
+                }
                 break;
 
             case 7: //Afficher la taille de la memoire
