@@ -69,11 +69,21 @@ int main(){
                 }
                 break;
             case 4: //Afficher tous les sommets
-
+                vide = arbreNonVide(arbre);
+                if(vide=false){
+                    afficherSommets(arbre);
+                }else{
+                    printf("Veuillez dans un premier temps creer un arbre");
+                }
                 break;
 
             case 5: //Afficher tous les elements
-
+                vide = arbreNonVide(arbre);
+                if(vide=false){
+                    afficherElements(arbre);
+                }else{
+                    printf("Veuillez dans un premier temps creer un arbre");
+                }
                 break;
             case 6: //Supprimer un element
                 printf("Veuillez saisir l'element que vous souhaitez supprimer\n");
