@@ -1,3 +1,7 @@
+#ifndef TP4_H
+#define TP4_H
+
+#include <stddef.h>
 #include <stdbool.h>
 
 typedef struct Sommet{
