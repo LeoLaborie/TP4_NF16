@@ -53,7 +53,15 @@ int main(){
                 break;
                 
             case 3: //Rechercher un element
-
+                printf("Veuillez saisir l'element que vous souhaitez rechercher\n");
+                scanf("%d", &element_recherche);
+                vide = arbreNonVide(arbre);
+                rechercher = validiteSommet(element_recherche);
+                if(vide=false && rechercher=true){
+                    rechercherElement(arbre, element_recherche);
+                }else{
+                    printf("Veuillez dans un premier temps creer un arbre");
+                }
                 break;
             case 4: //Afficher tous les sommets
 
