@@ -9,7 +9,12 @@ int main(){
     printf("NF16 - P024 - TP4 : Les Arbres Binaires de Recherche\n");
     printf("Laborie Leo - Playez Romain\n");
     bool continuer=true;
+    T_Arbre arbre;
+    arbre = NULL;
+    int element_suppression;
+    int element_recherche;
     int nombre_elements;
+    int element;
     int choix;
 
     while (continuer==true){
