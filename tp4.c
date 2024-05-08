@@ -89,7 +89,7 @@ bool arbreNonVide(T_Arbre abr){
     }else{
         vide = false;
     }
-
+    return vide;
 }
 
 T_Arbre supprimerElement(T_Arbre abr, int element){
