@@ -29,7 +29,14 @@ int main(){
 
         switch(choix){
             case 1: //Creer un sommet
-
+                printf("Veuillez saisir l'element du sommet a creer\n");
+                scanf("%d", &element);
+                creer = validiteSommet(element);
+                if creer==true{
+                    insererElement(nombre_elements);
+                }else{
+                    printf("Vous ne pouvez construire un sommet qu'avec un element corresppondant a un nombre entier");
+                }
                 break;
 
             case 2: //Inserer N elements
