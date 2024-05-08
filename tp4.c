@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 T_Sommet *creerSommet(int element){
-    T_Sommet *sommet;
+    T_Sommet *sommet = (T_Sommet *)malloc(sizeof(T_Sommet));
     sommet->borneInf = element;
     sommet->borneSup = element;
     sommet->filsGauche = NULL;
