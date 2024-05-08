@@ -82,7 +82,14 @@ bool validiteSommet(int element){
 }
 
 bool arbreNonVide(T_Arbre abr){
-    return (abr != NULL);
+    bool vide;
+    vide = false;
+    if(abr == NULL){
+        vide = true;
+    }else{
+        vide = false;
+    }
+
 }
 
 T_Arbre supprimerElement(T_Arbre abr, int element){
