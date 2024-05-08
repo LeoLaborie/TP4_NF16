@@ -35,3 +35,9 @@ bool validiteSommet(int element);
 bool validiteElements(int nombre_elements);
 
 bool arbreNonVide(T_Arbre abr);
+
+size_t calculeTailleNoeud(T_Sommet* sommet);
+
+size_t calculeTailleArbre(T_Arbre abr);
+
+void tailleMemoire(T_Arbre abr);
