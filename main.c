@@ -8,14 +8,11 @@
 int main(){
     printf("NF16 - P024 - TP4 : Les Arbres Binaires de Recherche\n");
     printf("Laborie Leo - Playez Romain\n");
-    bool continuer=true;
+    bool continuer, creer, vide, rechercher, supprimer, inserer;
+    continuer = true;
     T_Arbre arbre;
     arbre = NULL;
-    int element_suppression;
-    int element_recherche;
-    int nombre_elements;
-    int element;
-    int choix;
+    int choix, element, nombre_elements, element_recherche, element_suppression;
 
     while (continuer==true){
 
@@ -38,7 +35,7 @@ int main(){
                 scanf("%d", &element);
                 creer = validiteSommet(element);
                 if (creer == true){
-                    insererElement(nombre_elements);
+                    creerSommet(element);
                 }else{
                     printf("Vous ne pouvez construire un sommet qu'avec un element corresppondant a un nombre entier");
                 }
@@ -47,16 +44,16 @@ int main(){
             case 2: //Inserer N elements
                 printf("Veuillez saisir le nombre d'elements a inserer\n");
                 scanf("%d", &nombre_elements);
-                validiteElements(nombre_elements);
-                
+                inserer = validiteElements(nombre_elements);
+
                 if (inserer == true){
-                    insererElement(nombre_elements);
+                    insererElement(arbre, nombre_elements);
                 }else{
                     printf("Vous ne pouvez construire un arbre qu'avec un nombre d'elements positif");
                 }
 
                 break;
-                
+
             case 3: //Rechercher un element
                 printf("Veuillez saisir l'element que vous souhaitez rechercher\n");
                 scanf("%d", &element_recherche);
@@ -89,7 +86,7 @@ int main(){
                 printf("Veuillez saisir l'element que vous souhaitez supprimer\n");
                 scanf("%d", &element_suppression);
                 vide = arbreNonVide(arbre);
-                supprimmer = validiteSommet(element_recherche);
+                supprimer = validiteSommet(element_recherche);
                 if(vide == false && supprimer == true){
                     supprimerElement(arbre, element_suppression);
                 }else{
