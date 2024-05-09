@@ -111,3 +111,6 @@ T_Arbre supprimerElement(T_Arbre abr, int element){
     }
     return abr;
 }
+
+T_Sommet *rechercherElement(T_Arbre abr, int element){
+}
