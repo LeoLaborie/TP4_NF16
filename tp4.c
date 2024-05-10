@@ -113,6 +113,15 @@ T_Arbre supprimerElement(T_Arbre abr, int element){
 }
 
 T_Sommet *rechercherElement(T_Arbre abr, int element){
+    if (abr == NULL || (element >= abr->borneInf && element <= abr->borneSup)) {
+        return abr;
+    }
+
+    if (element < abr->borneInf) {
+        return rechercherElement(abr->filsGauche, element);
+    } else {
+        return rechercherElement(abr->filsDroit, element);
+    }
 }
 
 void choixCreationArbre(T_Arbre abr, char choix_suppression){
