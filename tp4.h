@@ -42,4 +42,6 @@ size_t calculeTailleArbre(T_Arbre abr);
 
 void tailleMemoire(T_Arbre abr);
 
+void choixCreationArbre(T_Arbre abr, char choix_suppression);
+
 #endif
