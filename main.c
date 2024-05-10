@@ -41,31 +41,14 @@ int main(){
                     if (creer == true){
                         creerSommet(element);
                     }else{
-                        printf("Vous ne pouvez construire un sommet qu'avec un element corresppondant a un nombre entier\n");
-                    }
-                }else{
-                    printf("Un arbre existe deja, voulez vous le supprimer pour en creer un nouveau ? (Y/N)\n");
-                    scanf("%c", &choix_suppression);
-                    while(choix_suppression != 'Y' || choix_suppression != 'N'){
                         printf("Un arbre existe deja, voulez vous le supprimer pour en creer un nouveau ? (Y/N)\n");
                         scanf("%c", &choix_suppression);
-                    }
-                    if(choix_suppression == 'Y'){
-                        //supprimer proprement l'arbre precedent
-                        printf("Veuillez saisir l'element du sommet a creer\n");
-                        scanf("%d", &element);
-                        creer = validiteSommet(element);
-                        if (creer == true){
-                            creerSommet(element);
-                        }else{
-                            printf("Vous ne pouvez construire un sommet qu'avec un element corresppondant a un nombre entier\n");
-                        }
-                    }else{
-                        printf("Vous avez choisi de garder l'arbre precedent, vous pouvez utiliser les autres fonctionnalites du menu\n");
+                        choixCreationArbre(arbre, choix_suppression);
                     }
                 }
 
                 break;
+
 
             case 2: //Inserer N elements
                 printf("Veuillez saisir le nombre d'elements a inserer\n");
