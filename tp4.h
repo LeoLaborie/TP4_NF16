@@ -14,6 +14,14 @@ struct Sommet* filsDroit;
 
 }T_Sommet;
 
+typedef struct size_t
+{
+    int taille_classique;
+    int taille_economise;
+    int taille_abr;
+}size_t;
+
+
 typedef T_Sommet* T_Arbre;
 
 T_Sommet *creerSommet(int element);
@@ -40,7 +48,7 @@ size_t calculeTailleNoeud(T_Sommet* sommet);
 
 size_t calculeTailleArbre(T_Arbre abr);
 
-void tailleMemoire(T_Arbre abr);
+void libererMemoire(T_Arbre abr);
 
 void choixCreationArbre(T_Arbre abr, char choix_suppression);
 

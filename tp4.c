@@ -148,3 +148,50 @@ void choixCreationArbre(T_Arbre abr, char choix_suppression){
      }
 
 }
+
+void libererMemoire(T_Arbre abr){
+    if (abr != NULL){
+        libererMemoire(abr->filsGauche);
+        libererMemoire(abr->filsDroit);
+        free(abr);
+    }
+}
+
+
+void tailleMemoire(T_Arbre abr){
+    
+    size_t *taille_arbre = calculeTailleArbre(abr);
+    printf("la taille (en octets) occupés par l’ABR est de %d", taille_arbre->taille_abr);
+    printf("la taille (en octets) qu’aurait occupé un ABR dans la représentation classique est de %d", taille_arbre->taille_classique);
+    printf("le nombre d’octets gagnés par cette représentation par intervalles est de %d", taille_arbre->taille_economise);
+
+}
+
+size_t* calculeTailleNoeud(T_Sommet* sommet){
+    size_t *taille;
+    taille->taille_classique = (sommet->borneSup+1-sommet->borneInf)*(sizeof(int)+__SIZEOF_POINTER__*2);
+    taille->taille_economise = taille->taille_classique - sizeof(T_Sommet);
+    taille->taille_abr = sizeof(T_Sommet);
+    return taille;
+}
+
+size_t* calculeTailleArbre(T_Arbre abr){
+    if (abr != NULL){
+        size_t *taille;
+        size_t *taille_gauche;
+        size_t *taille_droit;
+        taille_gauche = calculeTailleArbre(abr->filsGauche);
+        taille_droit = calculeTailleArbre(abr->filsDroit);
+        taille = calculeTailleNoeud(abr);
+        taille->taille_classique += taille_gauche->taille_classique + taille_droit->taille_classique;
+        taille->taille_economise += taille_gauche->taille_economise + taille_droit->taille_economise;
+        taille->taille_abr = taille_gauche->taille_abr + taille_droit->taille_abr;
+        return taille;
+    }
+
+    // Si l'arbre est NULL, on retourne une taille de 0
+    size_t *taille;
+    taille->taille_classique = 0;
+    taille->taille_economise = 0;
+    return taille;
+}
