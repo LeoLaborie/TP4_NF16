@@ -1,5 +1,6 @@
 #include "tp4.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 T_Sommet *creerSommet(int element){
     T_Sommet *sommet = (T_Sommet *)malloc(sizeof(T_Sommet));
@@ -82,14 +83,13 @@ bool validiteSommet(int element){
 }
 
 bool arbreNonVide(T_Arbre abr){
-    bool vide;
-    vide = false;
+    bool non_vide = false;
     if(abr == NULL){
-        vide = true;
+        non_vide = false;
     }else{
-        vide = false;
-    }
-    return vide;
+        non_vide = true;
+    }   
+    return non_vide;
 }
 
 T_Arbre supprimerElement(T_Arbre abr, int element){
@@ -160,26 +160,26 @@ void libererMemoire(T_Arbre abr){
 
 void tailleMemoire(T_Arbre abr){
     
-    size_t *taille_arbre = calculeTailleArbre(abr);
+    size_tree *taille_arbre = calculeTailleArbre(abr);
     printf("la taille (en octets) occupés par l’ABR est de %d", taille_arbre->taille_abr);
     printf("la taille (en octets) qu’aurait occupé un ABR dans la représentation classique est de %d", taille_arbre->taille_classique);
     printf("le nombre d’octets gagnés par cette représentation par intervalles est de %d", taille_arbre->taille_economise);
 
 }
 
-size_t* calculeTailleNoeud(T_Sommet* sommet){
-    size_t *taille;
+size_tree* calculeTailleNoeud(T_Sommet* sommet){
+    size_tree *taille;
     taille->taille_classique = (sommet->borneSup+1-sommet->borneInf)*(sizeof(int)+__SIZEOF_POINTER__*2);
     taille->taille_economise = taille->taille_classique - sizeof(T_Sommet);
     taille->taille_abr = sizeof(T_Sommet);
     return taille;
 }
 
-size_t* calculeTailleArbre(T_Arbre abr){
+size_tree* calculeTailleArbre(T_Arbre abr){
     if (abr != NULL){
-        size_t *taille;
-        size_t *taille_gauche;
-        size_t *taille_droit;
+        size_tree *taille;
+        size_tree *taille_gauche;
+        size_tree *taille_droit;
         taille_gauche = calculeTailleArbre(abr->filsGauche);
         taille_droit = calculeTailleArbre(abr->filsDroit);
         taille = calculeTailleNoeud(abr);
@@ -190,7 +190,7 @@ size_t* calculeTailleArbre(T_Arbre abr){
     }
 
     // Si l'arbre est NULL, on retourne une taille de 0
-    size_t *taille;
+    size_tree *taille;
     taille->taille_classique = 0;
     taille->taille_economise = 0;
     return taille;

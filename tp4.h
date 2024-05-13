@@ -14,12 +14,11 @@ struct Sommet* filsDroit;
 
 }T_Sommet;
 
-typedef struct size_t
-{
+typedef struct size_tree{
     int taille_classique;
     int taille_economise;
     int taille_abr;
-}size_t;
+}size_tree;
 
 
 typedef T_Sommet* T_Arbre;
@@ -44,9 +43,9 @@ bool validiteElements(int nombre_elements);
 
 bool arbreNonVide(T_Arbre abr);
 
-size_t calculeTailleNoeud(T_Sommet* sommet);
+size_tree* calculeTailleNoeud(T_Sommet* sommet);
 
-size_t calculeTailleArbre(T_Arbre abr);
+size_tree* calculeTailleArbre(T_Arbre abr);
 
 void libererMemoire(T_Arbre abr);
 

@@ -9,10 +9,9 @@
 int main(){
     printf("NF16 - P024 - TP4 : Les Arbres Binaires de Recherche\n");
     printf("Laborie Leo - Playez Romain\n");
-    bool continuer, creer, vide, rechercher, supprimer, inserer;
+    bool continuer, creer, non_vide, rechercher, supprimer, inserer;
     continuer = true;
-    T_Arbre arbre;
-    arbre = NULL;
+    T_Arbre arbre = NULL;
     int choix, element, nombre_elements, element_recherche, element_suppression;
     char choix_suppression;
     while (continuer==true){
@@ -33,8 +32,8 @@ int main(){
         switch(choix){
 
             case 1: //Creer un sommet
-                vide = arbreNonVide(arbre);
-                if(vide == true){
+                non_vide = arbreNonVide(arbre);
+                if(non_vide == true){
                     printf("Veuillez saisir l'element du sommet a creer\n");
                     scanf("%d", &element);
                     creer = validiteSommet(element);
@@ -66,9 +65,9 @@ int main(){
             case 3: //Rechercher un element
                 printf("Veuillez saisir l'element que vous souhaitez rechercher\n");
                 scanf("%d", &element_recherche);
-                vide = arbreNonVide(arbre);
+                non_vide = arbreNonVide(arbre);
                 rechercher = validiteSommet(element_recherche);
-                if(vide == false && rechercher == true){
+                if(non_vide == false && rechercher == true){
                     rechercherElement(arbre, element_recherche);
                 }else{
                     printf("Veuillez dans un premier temps creer un arbre");
@@ -76,8 +75,8 @@ int main(){
                 break;
 
             case 4: //Afficher tous les sommets
-                vide = arbreNonVide(arbre);
-                if(vide == false){
+                non_vide = arbreNonVide(arbre);
+                if(non_vide == false){
                     afficherSommets(arbre);
                 }else{
                     printf("Veuillez dans un premier temps creer un arbre");
@@ -85,8 +84,8 @@ int main(){
                 break;
 
             case 5: //Afficher tous les elements
-                vide = arbreNonVide(arbre);
-                if(vide == false){
+                non_vide = arbreNonVide(arbre);
+                if(non_vide == false){
                     afficherElements(arbre);
                 }else{
                     printf("Veuillez dans un premier temps creer un arbre");
@@ -96,9 +95,9 @@ int main(){
             case 6: //Supprimer un element
                 printf("Veuillez saisir l'element que vous souhaitez supprimer\n");
                 scanf("%d", &element_suppression);
-                vide = arbreNonVide(arbre);
+                non_vide = arbreNonVide(arbre);
                 supprimer = validiteSommet(element_recherche);
-                if(vide == false && supprimer == true){
+                if(non_vide == false && supprimer == true){
                     supprimerElement(arbre, element_suppression);
                 }else{
                     printf("Veuillez dans un premier temps creer un arbre");
@@ -106,8 +105,8 @@ int main(){
                 break;
 
             case 7: //Afficher la taille de la memoire
-                vide = arbreNonVide(arbre);
-                if(vide == false){
+                non_vide = arbreNonVide(arbre);
+                if(non_vide == false){
                     tailleMemoire(arbre);
                 }else{
                     printf("Veuillez dans un premier temps creer un arbre");
@@ -116,8 +115,8 @@ int main(){
                 break;
 
             case 8: //Quitter
-                vide = arbreNonVide(arbre);
-                if(vide == false){
+                non_vide = arbreNonVide(arbre);
+                if(non_vide == false){
                     libererMemoire(arbre);
                     continuer = false;
                 }else{
