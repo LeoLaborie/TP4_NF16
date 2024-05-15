@@ -49,6 +49,8 @@ size_tree* calculeTailleArbre(T_Arbre abr);
 
 void libererMemoire(T_Arbre abr);
 
-void choixCreationArbre(T_Arbre abr, char choix_suppression);
+void insertion_sommet(T_Arbre abr, T_Sommet* sommet);
+
+T_Arbre choixCreationArbre(T_Arbre abr);
 
 #endif

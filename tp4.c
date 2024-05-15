@@ -12,14 +12,14 @@ T_Sommet *creerSommet(int element){
 }
 
 T_Arbre insererElement(T_Arbre abr, int element){
-    T_Sommet *y;
+    T_Sommet *y = NULL;
     T_Sommet *x = abr;
     while (x!=NULL){
         y = x;
-        if (x->borneInf > element){
+        if (x->borneInf > element+1){
             x = x->filsGauche;
         }
-        else if (x->borneSup < element){
+        else if (x->borneSup < element-1){
             x = x->filsDroit;
         }
         else {
@@ -53,19 +53,11 @@ void afficherElements(T_Arbre abr){
     }
 }
 
-bool validiteElements(int nombre_elements){
-    
-    bool inserer;
-    inserer = true;
-    if(nombre_elements==0){
-        inserer = false;
-    }else if(nombre_elements>0){
-        inserer = true;
-    }else{
-        inserer = false;
+bool validiteElements(int element){
+    if(element>0){
+        return true;
     }
-    
-    return inserer;
+    return false;
 }
 
 bool validiteSommet(int element){
@@ -83,13 +75,25 @@ bool validiteSommet(int element){
 }
 
 bool arbreNonVide(T_Arbre abr){
-    bool non_vide = false;
-    if(abr == NULL){
-        non_vide = false;
-    }else{
-        non_vide = true;
-    }   
-    return non_vide;
+    // bool non_vide = false;
+    // if(abr == NULL){
+    //     non_vide = false;
+    // }else{
+    //     non_vide = true;
+    // }   
+    // return non_vide;
+    return (abr != NULL);
+}
+void insertion_sommet(T_Arbre abr, T_Sommet* sommet){
+    if (sommet != NULL){
+        insertion_sommet(abr, sommet->filsGauche);
+        insertion_sommet(abr, sommet->filsDroit);
+        for (int i = sommet->borneInf; i <= sommet->borneSup; i++){
+            insererElement(abr, i);
+        }
+    }
+    
+
 }
 
 T_Arbre supprimerElement(T_Arbre abr, int element){
@@ -98,8 +102,16 @@ T_Arbre supprimerElement(T_Arbre abr, int element){
     else if (element < x->borneInf) supprimerElement(x->filsGauche, element);
     else if (element > x->borneSup) supprimerElement(x->filsDroit, element);
     else if (element <= x->borneSup && element >= x->borneInf){
-        if (element == x->borneInf) x->borneInf++;
-        else if (element == x->borneSup) x->borneInf--;
+        if (element == x->borneInf && element < x->borneSup) x->borneInf++;
+        else if (element == x->borneSup && element > x->borneInf) x->borneInf--;
+        else if (element == x->borneInf && element == x->borneSup){
+            printf("in\n");
+            T_Sommet *fils_gauche = x->filsGauche;
+            T_Sommet *fils_droit = x->filsDroit;
+            x = NULL;
+            insertion_sommet(abr, fils_gauche);
+            insertion_sommet(abr, fils_droit);
+        }
         else {
             int bornesup = x->borneSup;
             x->borneSup = element-1;
@@ -124,28 +136,32 @@ T_Sommet *rechercherElement(T_Arbre abr, int element){
     }
 }
 
-void choixCreationArbre(T_Arbre abr, char choix_suppression){
-
+T_Arbre choixCreationArbre(T_Arbre abr){
+    char choix_suppression;
     int element;
-    bool creer;
+    bool creer = false;
 
-    while(choix_suppression != 'Y' || choix_suppression != 'N'){
-         printf("Un arbre existe deja, voulez vous le supprimer pour en creer un nouveau ? (Y/N)\n");
-         scanf("%c", &choix_suppression);
+    while(choix_suppression != 'Y' && choix_suppression != 'N' && choix_suppression != 'y' && choix_suppression != 'n'){
+        printf("Un arbre existe deja, voulez vous le supprimer pour en creer un nouveau ? (Y/N)\n");
+        while (getchar() != '\n');
+        choix_suppression = getchar();
     }
-    if(choix_suppression == 'Y'){
-         //supprimer proprement l'arbre precedent
-         printf("Veuillez saisir l'element du sommet a creer\n");
-         scanf("%d", &element);
-         creer = validiteSommet(element);
-         if (creer == true){
-             creerSommet(element);
-         }else{
-             printf("Vous ne pouvez construire un sommet qu'avec un element corresppondant a un nombre entier\n");
-         }
+    if(choix_suppression == 'Y' || choix_suppression == 'y'){
+        //supprimer proprement l'arbre precedent
+        libererMemoire(abr);
+        while (creer == false){
+            printf("Veuillez saisir l'element du sommet a creer\n");
+            scanf("%d", &element);
+            creer = validiteSommet(element);
+            if (creer == false){
+                printf("Vous ne pouvez construire un sommet qu'avec un element corresppondant a un nombre entier\n");
+            }
+        }
+        abr = creerSommet(element);
      }else{
          printf("Vous avez choisi de garder l'arbre precedent, vous pouvez utiliser les autres fonctionnalites du menu\n");
      }
+     return abr;
 
 }
 
