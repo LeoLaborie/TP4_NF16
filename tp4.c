@@ -49,6 +49,28 @@ void appelInsererElement(){
     }
 }
 
+void appelRechercherElement(){
+    T_Arbre arbre;
+    int element_recherche;
+    bool non_vide, rechercher;
+    printf("Veuillez saisir l'element que vous souhaitez rechercher\n");
+    scanf("%d", &element_recherche);
+    non_vide = arbreNonVide(arbre);
+    rechercher = validiteSommet(element_recherche);
+    if(non_vide == true && rechercher == true){
+        T_Sommet *s;
+        s = rechercherElement(arbre, element_recherche);
+        if (s == NULL){
+            printf("L'élément %d n'a pas été trouvé dans l'arbre !", element_recherche);
+        }
+        else{
+            printf("L'élément %d a été trouvé dans l'arbre", element_recherche);
+        }
+    }else{
+        printf("Veuillez dans un premier temps creer un arbre");
+    }
+}
+
 T_Sommet *creerSommet(int element){
     T_Sommet *sommet = (T_Sommet *)malloc(sizeof(T_Sommet));
     sommet->borneInf = element;
