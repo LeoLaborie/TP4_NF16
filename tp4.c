@@ -120,6 +120,18 @@ void appelTailleMemoire(){
 
 }
 
+void appelQuitter(){
+    T_Arbre arbre;
+    bool non_vide, continuer;
+    non_vide = arbreNonVide(arbre);
+    if(non_vide == true){
+        libererMemoire(arbre);
+        continuer = false;
+    }else{
+        continuer = false;
+    }
+}
+
 T_Sommet *creerSommet(int element){
     T_Sommet *sommet = (T_Sommet *)malloc(sizeof(T_Sommet));
     sommet->borneInf = element;
