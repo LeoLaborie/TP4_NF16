@@ -82,6 +82,17 @@ void appelAfficherSommets(){
     }
 }
 
+void appelAfficherElements(){
+    T_Arbre arbre;
+    bool non_vide;
+    non_vide = arbreNonVide(arbre);
+    if(non_vide == true){
+        afficherElements(arbre);
+    }else{
+        printf("Veuillez dans un premier temps creer un arbre");
+    }
+}
+
 T_Sommet *creerSommet(int element){
     T_Sommet *sommet = (T_Sommet *)malloc(sizeof(T_Sommet));
     sommet->borneInf = element;
