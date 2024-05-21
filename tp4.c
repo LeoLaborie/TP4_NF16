@@ -23,6 +23,32 @@ void appelCreerSommet(){
     }
 }
 
+void appelInsererElement(){
+    T_Arbre arbre;
+    bool inserer;
+    int nombre_elements;
+    printf("Veuillez saisir le nombre d'elements a inserer\n");
+    scanf("%d", &nombre_elements);
+    inserer = validiteElements(nombre_elements);
+    if (inserer == true){
+        int element;
+        for (int i = 0; i < nombre_elements; i++){
+            printf("rentrez un element a inserer\n");
+            scanf("%d", &element);
+            if (validiteElements(element)==true){
+                arbre = insererElement(arbre, element);
+            }
+            else{
+                printf("element non valide\n");
+                i--;
+            }
+
+        }
+    }else{
+        printf("Vous ne pouvez construire un arbre qu'avec un nombre d'elements positif");
+    }
+}
+
 T_Sommet *creerSommet(int element){
     T_Sommet *sommet = (T_Sommet *)malloc(sizeof(T_Sommet));
     sommet->borneInf = element;
