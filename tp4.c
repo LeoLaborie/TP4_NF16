@@ -93,6 +93,21 @@ void appelAfficherElements(){
     }
 }
 
+void appelSupprimerElement(){
+    T_Arbre arbre;
+    bool non_vide, supprimer;
+    int element_suppression, element_recherche;
+    printf("Veuillez saisir l'element que vous souhaitez supprimer\n");
+    scanf("%d", &element_suppression);
+    non_vide = arbreNonVide(arbre);
+    supprimer = validiteSommet(element_recherche);
+    if(non_vide == true && supprimer == true){
+        supprimerElement(arbre, element_suppression);
+    }else{
+        printf("Veuillez dans un premier temps creer un arbre");
+    }
+}
+
 T_Sommet *creerSommet(int element){
     T_Sommet *sommet = (T_Sommet *)malloc(sizeof(T_Sommet));
     sommet->borneInf = element;
