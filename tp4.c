@@ -2,6 +2,27 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+void appelCreerSommet(){
+    T_Arbre arbre = NULL;
+    bool non_vide, creer;
+    int element;
+    non_vide = arbreNonVide(arbre);
+    if(non_vide == false){
+        creer = false;
+        while (creer == false){
+            printf("Veuillez saisir l'element du sommet a creer\n");
+            scanf("%d", &element);
+            creer = validiteSommet(element);
+            if (creer == false){
+                printf("rentrez un sommet valide svp\n");
+            }
+        }
+        arbre = creerSommet(element);
+    }else{
+        choixCreationArbre(arbre);
+    }
+}
+
 T_Sommet *creerSommet(int element){
     T_Sommet *sommet = (T_Sommet *)malloc(sizeof(T_Sommet));
     sommet->borneInf = element;
