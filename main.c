@@ -31,12 +31,12 @@ int main(){
         switch(choix){
 
             case 1: //Creer un sommet
-                appelCreerSommet(arbre);
+                arbre = appelCreerSommet(arbre);
 
                 break;
 
             case 2: //Inserer N elements
-                appelInsererNElement(arbre);
+                arbre = appelInsererNElement(arbre);
 
                 break;
 
@@ -56,7 +56,7 @@ int main(){
                 break;
 
             case 6: //Supprimer un element
-                appelSupprimerElement(arbre);
+                arbre = appelSupprimerElement(arbre);
 
                 break;
 
