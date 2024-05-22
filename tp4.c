@@ -311,12 +311,16 @@ void tailleMemoire(T_Arbre abr) {
     printf("Le nombre d'octets gagnes grace a cette representation est : %zu octets\n", gainMemoire);
 }
 
-size_tree* calculeTailleNoeud(T_Sommet* sommet){
-    size_tree *taille;
-    taille->taille_classique = (sommet->borneSup+1-sommet->borneInf)*(sizeof(int)+__SIZEOF_POINTER__*2);
-    taille->taille_economise = taille->taille_classique - sizeof(T_Sommet);
-    taille->taille_abr = sizeof(T_Sommet);
-    return taille;
+size_t calculerTailleNoeud(T_Sommet* sommet) {
+    if (sommet == NULL) {
+        return 0;
+    }
+    
+    size_t tailleNoeud = sizeof(T_Sommet);
+    tailleNoeud += calculerTailleNoeud(sommet->filsGauche);
+    tailleNoeud += calculerTailleNoeud(sommet->filsDroit);
+    
+    return tailleNoeud;
 }
 
 size_tree* calculeTailleArbre(T_Arbre abr){
