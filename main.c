@@ -9,6 +9,7 @@
 int main(){
     printf("NF16 - P024 - TP4 : Les Arbres Binaires de Recherche\n");
     printf("Laborie Leo - Playez Romain\n");
+    T_Arbre arbre = NULL;
     bool continuer = true;
     int choix;
 
@@ -30,12 +31,12 @@ int main(){
         switch(choix){
 
             case 1: //Creer un sommet
-                appelCreerSommet();
+                appelCreerSommet(arbre);
 
                 break;
 
             case 2: //Inserer N elements
-                appelInsererNElement();
+                appelInsererNElement(arbre);
 
                 break;
 
