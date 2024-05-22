@@ -41,32 +41,32 @@ int main(){
                 break;
 
             case 3: //Rechercher un element
-                appelRechercherElement();
+                appelRechercherElement(arbre);
 
                 break;
 
             case 4: //Afficher tous les sommets
-                appelAfficherSommets();
+                appelAfficherSommets(arbre);
 
                 break;
 
             case 5: //Afficher tous les elements
-                appelAfficherElements();
+                appelAfficherElements(arbre);
 
                 break;
 
             case 6: //Supprimer un element
-                appelSupprimerElement();
+                appelSupprimerElement(arbre);
 
                 break;
 
             case 7: //Afficher la taille de la memoire
-                appelTailleMemoire();
+                appelTailleMemoire(arbre);
 
                 break;
 
             case 8: //Quitter
-                continuer = appelQuitter();
+                continuer = appelQuitter(arbre);
                 break;
 
             default :
