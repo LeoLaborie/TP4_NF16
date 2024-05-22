@@ -18,7 +18,7 @@ T_Arbre appelCreerSommet(T_Arbre arbre){
         }
         arbre = creerSommet(element);
     }else{
-        choixCreationArbre(arbre);
+        arbre = choixCreationArbre(arbre);
     }
     return arbre;
 }
