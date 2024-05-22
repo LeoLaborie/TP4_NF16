@@ -53,7 +53,7 @@ void insertion_sommet(T_Arbre abr, T_Sommet* sommet);
 
 T_Arbre choixCreationArbre(T_Arbre abr);
 
-void appelCreerSommet(T_Arbre arbre);
+T_Arbre appelCreerSommet(T_Arbre arbre);
 
 T_Arbre appelInsererNElement(T_Arbre arbre);
 
@@ -63,7 +63,7 @@ void appelAfficherSommets(T_Arbre arbre);
 
 void appelAfficherElements(T_Arbre arbre);
 
-void appelSupprimerElement(T_Arbre arbre);
+T_Arbre appelSupprimerElement(T_Arbre arbre);
 
 void appelTailleMemoire(T_Arbre arbre);
 
