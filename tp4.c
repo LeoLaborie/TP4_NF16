@@ -23,7 +23,7 @@ void appelCreerSommet(){
     }
 }
 
-void appelInsererElement(){
+T_Arbre appelInsererNElement(){
     T_Arbre arbre;
     bool inserer;
     int nombre_elements;
@@ -47,6 +47,7 @@ void appelInsererElement(){
     }else{
         printf("Vous ne pouvez construire un arbre qu'avec un nombre d'elements positif");
     }
+    return arbre;
 }
 
 void appelRechercherElement(){
@@ -120,16 +121,14 @@ void appelTailleMemoire(){
 
 }
 
-void appelQuitter(){
+bool appelQuitter(){
     T_Arbre arbre;
-    bool non_vide, continuer;
+    bool non_vide;
     non_vide = arbreNonVide(arbre);
     if(non_vide == true){
         libererMemoire(arbre);
-        continuer = false;
-    }else{
-        continuer = false;
     }
+    return false;
 }
 
 T_Sommet *creerSommet(int element){

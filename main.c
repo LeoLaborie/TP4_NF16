@@ -9,7 +9,7 @@
 int main(){
     printf("NF16 - P024 - TP4 : Les Arbres Binaires de Recherche\n");
     printf("Laborie Leo - Playez Romain\n");
-    bool continuer;
+    bool continuer = true;
     int choix;
 
     while (continuer==true){
@@ -35,7 +35,7 @@ int main(){
                 break;
 
             case 2: //Inserer N elements
-                appelInsererElement();
+                appelInsererNElement();
 
                 break;
 
@@ -65,8 +65,7 @@ int main(){
                 break;
 
             case 8: //Quitter
-                appelQuitter();
-
+                continuer = appelQuitter();
                 break;
 
             default :
