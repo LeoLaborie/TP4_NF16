@@ -324,6 +324,17 @@ size_t calculerTailleNoeud(T_Sommet* sommet) {
 }
 
 size_t calculerTailleArbre(T_Arbre abr) {
-    
     return calculerTailleNoeud(abr);
+}
+
+int compterNombreElements(T_Sommet* sommet) {
+    if (sommet == NULL) {
+        return 0;
+    }
+    
+    int nombreTotalElements = sommet->borneSup - sommet->borneInf + 1;
+    nombreTotalElements += compterNombreElements(sommet->filsGauche);
+    nombreTotalElements += compterNombreElements(sommet->filsDroit);
+    
+    return nombreTotalElements;
 }
