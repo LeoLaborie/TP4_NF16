@@ -35,17 +35,19 @@ void afficherElements(T_Arbre abr);
 
 T_Arbre supprimerElement(T_Arbre abr, int element);
 
-void tailleMemoire(T_Arbre abr);
-
 bool validiteSommet(int element);
 
 bool validiteElements(int nombre_elements);
 
 bool arbreNonVide(T_Arbre abr);
 
-size_tree* calculeTailleNoeud(T_Sommet* sommet);
+void tailleMemoire(T_Arbre abr);
 
-size_tree* calculeTailleArbre(T_Arbre abr);
+size_t calculerTailleNoeud(T_Sommet* sommet);
+
+size_t calculerTailleArbre(T_Arbre abr);
+
+int compterNombreElements(T_Sommet* sommet);
 
 void libererMemoire(T_Arbre abr);
 
