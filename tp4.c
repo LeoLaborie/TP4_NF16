@@ -121,8 +121,7 @@ void appelTailleMemoire(){
 
 }
 
-bool appelQuitter(){
-    T_Arbre arbre;
+bool appelQuitter(T_Arbre arbre){
     bool non_vide;
     non_vide = arbreNonVide(arbre);
     if(non_vide == true){
