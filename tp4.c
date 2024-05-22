@@ -122,12 +122,16 @@ void appelTailleMemoire(){
 }
 
 bool appelQuitter(T_Arbre arbre){
-    bool non_vide;
+    bool non_vide, continuer;
     non_vide = arbreNonVide(arbre);
     if(non_vide == true){
         libererMemoire(arbre);
+        continuer = False;
     }
-    return false;
+    else {
+        continuer = True;
+    }
+    return continuer;
 }
 
 T_Sommet *creerSommet(int element){
