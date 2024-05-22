@@ -300,14 +300,15 @@ void libererMemoire(T_Arbre abr){
     }
 }
 
+void tailleMemoire(T_Arbre abr) {
+    size_t tailleReelle = calculerTailleArbre(abr);
+    int nombreElements = compterNombreElements(abr);
+    size_t tailleRepresentationClassique = nombreElements * sizeof(T_Sommet);
+    size_t gainMemoire = tailleRepresentationClassique - tailleReelle;
 
-void tailleMemoire(T_Arbre abr){
-    
-    size_tree *taille_arbre = calculeTailleArbre(abr);
-    printf("la taille (en octets) occupés par l’ABR est de %d", taille_arbre->taille_abr);
-    printf("la taille (en octets) qu’aurait occupé un ABR dans la représentation classique est de %d", taille_arbre->taille_classique);
-    printf("le nombre d’octets gagnés par cette représentation par intervalles est de %d", taille_arbre->taille_economise);
-
+    printf("La taille de l'ABR est : %zu octets\n", tailleReelle);
+    printf("La taille de l'ABR en representation classique est : %zu octets\n", tailleRepresentationClassique);
+    printf("Le nombre d'octets gagnes grace a cette representation est : %zu octets\n", gainMemoire);
 }
 
 size_tree* calculeTailleNoeud(T_Sommet* sommet){
