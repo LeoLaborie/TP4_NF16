@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void appelCreerSommet(){
-    T_Arbre arbre = NULL;
+T_Arbre appelCreerSommet(T_Arbre arbre){
     bool non_vide, creer;
     int element;
     non_vide = arbreNonVide(arbre);
@@ -21,10 +20,10 @@ void appelCreerSommet(){
     }else{
         choixCreationArbre(arbre);
     }
+    return arbre;
 }
 
-T_Arbre appelInsererNElement(){
-    T_Arbre arbre;
+T_Arbre appelInsererNElement(T_Arbre arbre){
     bool inserer;
     int nombre_elements;
     printf("Veuillez saisir le nombre d'elements a inserer\n");
@@ -50,8 +49,7 @@ T_Arbre appelInsererNElement(){
     return arbre;
 }
 
-void appelRechercherElement(){
-    T_Arbre arbre;
+void appelRechercherElement(T_Arbre arbre){
     int element_recherche;
     bool non_vide, rechercher;
     printf("Veuillez saisir l'element que vous souhaitez rechercher\n");
@@ -72,8 +70,7 @@ void appelRechercherElement(){
     }
 }
 
-void appelAfficherSommets(){
-    T_Arbre arbre;
+void appelAfficherSommets(T_Arbre arbre){
     bool non_vide;
     non_vide = arbreNonVide(arbre);
     if(non_vide == true){
@@ -83,8 +80,7 @@ void appelAfficherSommets(){
     }
 }
 
-void appelAfficherElements(){
-    T_Arbre arbre;
+void appelAfficherElements(T_Arbre arbre){
     bool non_vide;
     non_vide = arbreNonVide(arbre);
     if(non_vide == true){
@@ -94,8 +90,7 @@ void appelAfficherElements(){
     }
 }
 
-void appelSupprimerElement(){
-    T_Arbre arbre;
+T_Arbre appelSupprimerElement(T_Arbre arbre){
     bool non_vide, supprimer;
     int element_suppression, element_recherche;
     printf("Veuillez saisir l'element que vous souhaitez supprimer\n");
@@ -107,10 +102,10 @@ void appelSupprimerElement(){
     }else{
         printf("Veuillez dans un premier temps creer un arbre");
     }
+    return arbre;
 }
 
-void appelTailleMemoire(){
-    T_Arbre arbre;
+void appelTailleMemoire(T_Arbre arbre){
     bool non_vide;
     non_vide = arbreNonVide(arbre);
     if(non_vide == true){
