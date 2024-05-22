@@ -323,23 +323,7 @@ size_t calculerTailleNoeud(T_Sommet* sommet) {
     return tailleNoeud;
 }
 
-size_tree* calculeTailleArbre(T_Arbre abr){
-    if (abr != NULL){
-        size_tree *taille;
-        size_tree *taille_gauche;
-        size_tree *taille_droit;
-        taille_gauche = calculeTailleArbre(abr->filsGauche);
-        taille_droit = calculeTailleArbre(abr->filsDroit);
-        taille = calculeTailleNoeud(abr);
-        taille->taille_classique += taille_gauche->taille_classique + taille_droit->taille_classique;
-        taille->taille_economise += taille_gauche->taille_economise + taille_droit->taille_economise;
-        taille->taille_abr = taille_gauche->taille_abr + taille_droit->taille_abr;
-        return taille;
-    }
-
-    // Si l'arbre est NULL, on retourne une taille de 0
-    size_tree *taille;
-    taille->taille_classique = 0;
-    taille->taille_economise = 0;
-    return taille;
+size_t calculerTailleArbre(T_Arbre abr) {
+    
+    return calculerTailleNoeud(abr);
 }
