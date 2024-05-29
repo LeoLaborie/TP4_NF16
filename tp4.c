@@ -98,7 +98,8 @@ T_Arbre appelSupprimerElement(T_Arbre arbre){
     non_vide = arbreNonVide(arbre);
     supprimer = validiteSommet(element_recherche);
     if(non_vide == true && supprimer == true){
-        supprimerElement(arbre, element_suppression);
+        T_Sommet *pere;
+        arbre = supprimerElement(arbre, element_suppression, pere);
     }else{
         printf("Veuillez dans un premier temps creer un arbre");
     }
@@ -121,10 +122,10 @@ bool appelQuitter(T_Arbre arbre){
     non_vide = arbreNonVide(arbre);
     if(non_vide == true){
         libererMemoire(arbre);
-        continuer = False;
+        continuer = false;
     }
     else {
-        continuer = True;
+        continuer = true;
     }
     return continuer;
 }
@@ -223,21 +224,41 @@ void insertion_sommet(T_Arbre abr, T_Sommet* sommet){
 
 }
 
-T_Arbre supprimerElement(T_Arbre abr, int element){
+T_Arbre supprimerElement(T_Arbre abr, int element, T_Sommet* pere){
     T_Sommet *x = abr;
     if (x == NULL) return abr;
-    else if (element < x->borneInf) supprimerElement(x->filsGauche, element);
-    else if (element > x->borneSup) supprimerElement(x->filsDroit, element);
+    else if (element < x->borneInf) supprimerElement(x->filsGauche, element, x);
+    else if (element > x->borneSup) supprimerElement(x->filsDroit, element, x);
     else if (element <= x->borneSup && element >= x->borneInf){
         if (element == x->borneInf && element < x->borneSup) x->borneInf++;
-        else if (element == x->borneSup && element > x->borneInf) x->borneInf--;
+        else if (element == x->borneSup && element > x->borneInf) x->borneSup--;
         else if (element == x->borneInf && element == x->borneSup){
-            printf("in\n");
-            T_Sommet *fils_gauche = x->filsGauche;
-            T_Sommet *fils_droit = x->filsDroit;
-            x = NULL;
-            insertion_sommet(abr, fils_gauche);
-            insertion_sommet(abr, fils_droit);
+            printf("Suppression du sommet [%d ; %d]\n", x->borneInf, x->borneSup);
+            if (x->filsGauche == NULL && x->filsDroit == NULL){
+                if (pere->filsDroit == x) pere->filsDroit = NULL;
+                else pere->filsGauche = NULL;
+                x = NULL;
+            }
+            else if (x->filsGauche == NULL){
+                if (pere->filsDroit == x) pere->filsDroit = x->filsDroit;
+                else pere->filsGauche = x->filsDroit;
+                x = NULL;
+            }
+            else if (x->filsDroit == NULL){
+                if (pere->filsDroit == x) pere->filsDroit = x->filsGauche;
+                else pere->filsGauche = x->filsGauche;
+                x = NULL;
+            }
+            else{
+                T_Sommet *y = x->filsDroit;
+                while (y->filsGauche != NULL){
+                    y = y->filsGauche;
+                }
+                x->borneInf = y->borneInf;
+                x->borneSup = y->borneSup;
+                supprimerElement(x->filsDroit, y->borneInf, x);
+            }
+
         }
         else {
             int bornesup = x->borneSup;
@@ -294,9 +315,10 @@ T_Arbre choixCreationArbre(T_Arbre abr){
 
 void libererMemoire(T_Arbre abr){
     if (abr != NULL){
+        printf("liberation du sommet [%d ; %d]\n", abr->borneInf, abr->borneSup);
         libererMemoire(abr->filsGauche);
         libererMemoire(abr->filsDroit);
-        free(abr);
+        abr = NULL;
     }
 }
 

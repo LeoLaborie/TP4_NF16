@@ -5,13 +5,11 @@
 #include <stdbool.h>
 
 typedef struct Sommet{
-    
+
 int borneInf;
 int borneSup;
 struct Sommet* filsGauche;
 struct Sommet* filsDroit;
-
-
 }T_Sommet;
 
 typedef struct size_tree{
@@ -33,7 +31,7 @@ void afficherSommets(T_Arbre abr);
 
 void afficherElements(T_Arbre abr);
 
-T_Arbre supprimerElement(T_Arbre abr, int element);
+T_Arbre supprimerElement(T_Arbre abr, int element, T_Sommet *pere);
 
 bool validiteSommet(int element);
 
