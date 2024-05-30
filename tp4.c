@@ -199,26 +199,6 @@ void afficherElements(T_Arbre abr){
     }
 }
 
-bool validiteElements(int element){
-    if(element>0 && element<200){
-        return true;
-    }
-    return false;
-}
-
-bool validiteSommet(int element){
-    
-    bool creer;
-    creer = true;
-    if(element>0 && element<200){
-        creer = true;
-    }else{
-        creer = false;
-    }
-    return creer;
-
-}
-
 bool arbreNonVide(T_Arbre abr){
     // bool non_vide = false;
     // if(abr == NULL){
@@ -395,4 +375,24 @@ int compterNombreElements(T_Sommet* sommet) {
     nombreTotalElements += compterNombreElements(sommet->filsDroit);
     
     return nombreTotalElements;
+}
+
+bool validiteElements(int element){
+    if(element>0 && element<200){
+        return true;
+    }
+    return false;
+}
+
+bool validiteSommet(int element){
+    
+    bool creer;
+    creer = true;
+    if(element>0 && element<200){
+        creer = true;
+    }else{
+        creer = false;
+    }
+    return creer;
+
 }
