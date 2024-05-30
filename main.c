@@ -14,7 +14,6 @@ int main(){
     int choix;
 
     while (continuer==true){
-
         printf("\n------------------------------------------------\n");
         printf("1. Creer un sommet\n");
         printf("2. Inserer N elements\n");

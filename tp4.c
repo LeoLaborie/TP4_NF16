@@ -10,6 +10,7 @@ T_Arbre appelCreerSommet(T_Arbre arbre){
         creer = false;
         while (creer == false){
             printf("Veuillez saisir l'element du sommet a creer\n");
+            while(getchar() != '\n');
             scanf("%d", &element);
             creer = validiteSommet(element);
             if (creer == false){
@@ -24,15 +25,19 @@ T_Arbre appelCreerSommet(T_Arbre arbre){
 }
 
 T_Arbre appelInsererNElement(T_Arbre arbre){
-    bool inserer;
+    bool inserer = false;
     int nombre_elements;
-    printf("Veuillez saisir le nombre d'elements a inserer\n");
-    scanf("%d", &nombre_elements);
-    inserer = validiteElements(nombre_elements);
+    while (inserer == false){
+        printf("Veuillez saisir le nombre d'elements a inserer\n");
+        while (getchar() != '\n');
+        scanf("%d", &nombre_elements);
+        inserer = validiteElements(nombre_elements);
+    }
     if (inserer == true){
         int element;
         for (int i = 0; i < nombre_elements; i++){
             printf("rentrez un element a inserer\n");
+            while(getchar() != '\n');
             scanf("%d", &element);
             if (validiteElements(element)==true){
                 arbre = insererElement(arbre, element);
@@ -52,10 +57,17 @@ T_Arbre appelInsererNElement(T_Arbre arbre){
 void appelRechercherElement(T_Arbre arbre){
     int element_recherche;
     bool non_vide, rechercher;
-    printf("Veuillez saisir l'element que vous souhaitez rechercher\n");
-    scanf("%d", &element_recherche);
-    non_vide = arbreNonVide(arbre);
-    rechercher = validiteSommet(element_recherche);
+    while (rechercher == false){
+        printf("Veuillez saisir l'element que vous souhaitez rechercher\n");
+        while(getchar() != '\n');
+        scanf("%d", &element_recherche);
+        non_vide = arbreNonVide(arbre);
+        rechercher = validiteSommet(element_recherche);
+        if (rechercher == false){
+            printf("rentrez un sommet valide svp\n");
+        }
+
+    }
     if(non_vide == true && rechercher == true){
         T_Sommet *s;
         s = rechercherElement(arbre, element_recherche);
@@ -92,14 +104,20 @@ void appelAfficherElements(T_Arbre arbre){
 
 T_Arbre appelSupprimerElement(T_Arbre arbre){
     bool non_vide, supprimer;
-    int element_suppression, element_recherche;
-    printf("Veuillez saisir l'element que vous souhaitez supprimer\n");
-    scanf("%d", &element_suppression);
-    non_vide = arbreNonVide(arbre);
-    supprimer = validiteSommet(element_recherche);
+    int element_a_supprimer;
+    while(supprimer == false){
+        printf("Veuillez saisir l'element du sommet a supprimer\n");
+        while(getchar() != '\n');
+        scanf("%d", &element_a_supprimer);
+        non_vide = arbreNonVide(arbre);
+        supprimer = validiteSommet(element_a_supprimer);
+        if (supprimer == false){
+            printf("rentrez un sommet valide svp\n");
+        }
+    }
     if(non_vide == true && supprimer == true){
-        T_Sommet *pere;
-        arbre = supprimerElement(arbre, element_suppression, pere);
+        
+        arbre = supprimerElement(arbre, element_a_supprimer, NULL);
     }else{
         printf("Veuillez dans un premier temps creer un arbre");
     }
@@ -182,7 +200,7 @@ void afficherElements(T_Arbre abr){
 }
 
 bool validiteElements(int element){
-    if(element>0){
+    if(element>0 && element<200){
         return true;
     }
     return false;
@@ -192,12 +210,11 @@ bool validiteSommet(int element){
     
     bool creer;
     creer = true;
-    if(element==0 || element>0 || element<0){
+    if(element>0 && element<200){
         creer = true;
     }else{
         creer = false;
     }
-    
     return creer;
 
 }
@@ -235,19 +252,38 @@ T_Arbre supprimerElement(T_Arbre abr, int element, T_Sommet* pere){
         else if (element == x->borneInf && element == x->borneSup){
             printf("Suppression du sommet [%d ; %d]\n", x->borneInf, x->borneSup);
             if (x->filsGauche == NULL && x->filsDroit == NULL){
-                if (pere->filsDroit == x) pere->filsDroit = NULL;
-                else pere->filsGauche = NULL;
-                x = NULL;
+                if (pere != NULL){
+                    if (pere->filsDroit == x) pere->filsDroit = NULL;
+                    else pere->filsGauche = NULL;
+                    x = NULL;
+                }
+
+                else {
+                    free(x);
+                    abr = NULL;
+                    }
             }
             else if (x->filsGauche == NULL){
+                if (pere != NULL){
                 if (pere->filsDroit == x) pere->filsDroit = x->filsDroit;
                 else pere->filsGauche = x->filsDroit;
                 x = NULL;
+                }
+                else {
+                    abr = x->filsDroit;
+                    free(x);
+                }
             }
             else if (x->filsDroit == NULL){
+                if (pere != NULL){
                 if (pere->filsDroit == x) pere->filsDroit = x->filsGauche;
                 else pere->filsGauche = x->filsGauche;
                 x = NULL;
+                }
+                else {
+                    abr = x->filsGauche;
+                    free(x);
+                }
             }
             else{
                 T_Sommet *y = x->filsDroit;
