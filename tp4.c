@@ -136,15 +136,10 @@ void appelTailleMemoire(T_Arbre arbre){
 }
 
 bool appelQuitter(T_Arbre arbre){
-    bool non_vide, continuer;
-    non_vide = arbreNonVide(arbre);
-    if(non_vide == true){
-        libererMemoire(arbre);
-        continuer = false;
-    }
-    else {
-        continuer = true;
-    }
+    bool continuer;
+    libererMemoire(arbre);
+    continuer = false;
+
     return continuer;
 }
 
