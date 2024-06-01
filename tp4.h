@@ -12,13 +12,6 @@ struct Sommet* filsGauche;
 struct Sommet* filsDroit;
 }T_Sommet;
 
-typedef struct size_tree{
-    int taille_classique;
-    int taille_economise;
-    int taille_abr;
-}size_tree;
-
-
 typedef T_Sommet* T_Arbre;
 
 T_Sommet *creerSommet(int element);

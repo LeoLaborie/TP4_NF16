@@ -329,19 +329,19 @@ void libererMemoire(T_Arbre abr){
         printf("liberation du sommet [%d ; %d]\n", abr->borneInf, abr->borneSup);
         libererMemoire(abr->filsGauche);
         libererMemoire(abr->filsDroit);
-        abr = NULL;
+        free(abr);
     }
 }
 
 void tailleMemoire(T_Arbre abr) {
     size_t tailleReelle = calculerTailleArbre(abr);
     int nombreElements = compterNombreElements(abr);
-    size_t tailleRepresentationClassique = nombreElements * sizeof(T_Sommet);
-    size_t gainMemoire = tailleRepresentationClassique - tailleReelle;
+    size_t tailleRepresentationClassique = nombreElements * (sizeof(int)+(2*__SIZEOF_POINTER__));
+    int gainMemoire = tailleRepresentationClassique - tailleReelle;
 
     printf("La taille de l'ABR est : %zu octets\n", tailleReelle);
     printf("La taille de l'ABR en representation classique est : %zu octets\n", tailleRepresentationClassique);
-    printf("Le nombre d'octets gagnes grace a cette representation est : %zu octets\n", gainMemoire);
+    printf("Le nombre d'octets gagnes grace a cette representation est : %d octets\n", gainMemoire);
 }
 
 size_t calculerTailleNoeud(T_Sommet* sommet) {
