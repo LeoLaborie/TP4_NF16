@@ -168,12 +168,46 @@ T_Sommet *y = NULL;
         else {
             if (element == x->borneInf - 1) x->borneInf = element;
             if (element == x->borneSup + 1) x->borneSup = element;
+            // merge 2 sommets si la borne sup du premier est egal à la borne inf du deuxieme - 1
+            y=x;
+            T_Sommet *successeur = y->filsDroit;
+            T_Sommet *pere_de_successeur = y;
+            while (successeur != NULL && successeur->filsGauche != NULL){
+                pere_de_successeur = successeur;
+                successeur = successeur->filsGauche;
+            }
+            if (successeur != NULL && y->borneSup + 1 == successeur->borneInf){
+                int borneinf = successeur->borneInf;
+                int bornesup = successeur->borneSup;
+                for (int i = borneinf; i <= bornesup; i++){
+                    supprimerElement(successeur, i, pere_de_successeur);
+                    insererElement(y, i);
+                }
+            }
+            // merge 2 sommets si la borne inf du premier est egal à la borne sup du deuxieme + 1
+            T_Sommet *predecesseur = y->filsGauche;
+            T_Sommet *pere_de_predecesseur = y;
+            while (predecesseur != NULL && predecesseur->filsDroit != NULL){
+                pere_de_predecesseur = predecesseur;
+                predecesseur = predecesseur->filsDroit;
+            }
+            if (predecesseur != NULL && y->borneInf - 1 == predecesseur->borneSup){
+                int borneinf = predecesseur->borneInf;
+                int bornesup = predecesseur->borneSup;
+                for (int i = borneinf; i <= bornesup; i++){
+                    supprimerElement(predecesseur, i, pere_de_predecesseur);
+                    insererElement(y, i);
+                }
+            }
+
+            
             return abr;
         }
     }
     if (y == NULL) return creerSommet(element);
     else if (element < y->borneInf) y->filsGauche = creerSommet(element);
     else if (element > y->borneSup) y->filsDroit = creerSommet(element);
+    
     return abr;
 }
 
