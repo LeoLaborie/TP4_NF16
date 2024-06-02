@@ -44,7 +44,7 @@ T_Arbre appelInsererNElement(T_Arbre arbre){
             }
             else{
                 printf("element non valide\n");
-                i--;
+
             }
 
         }
@@ -53,6 +53,7 @@ T_Arbre appelInsererNElement(T_Arbre arbre){
     }
     return arbre;
 }
+
 
 void appelRechercherElement(T_Arbre arbre){
     int element_recherche;
@@ -116,7 +117,7 @@ T_Arbre appelSupprimerElement(T_Arbre arbre){
         }
     }
     if(non_vide == true && supprimer == true){
-        
+
         arbre = supprimerElement(arbre, element_a_supprimer, NULL);
     }else{
         printf("Veuillez dans un premier temps creer un arbre");
@@ -139,6 +140,7 @@ bool appelQuitter(T_Arbre arbre){
     bool continuer;
     libererMemoire(arbre);
     continuer = false;
+    printf("0");
 
     return continuer;
 }
@@ -153,7 +155,7 @@ T_Sommet *creerSommet(int element){
 }
 
 T_Arbre insererElement(T_Arbre abr, int element){
-    T_Sommet *y = NULL;
+T_Sommet *y = NULL;
     T_Sommet *x = abr;
     while (x!=NULL){
         y = x;
@@ -175,6 +177,17 @@ T_Arbre insererElement(T_Arbre abr, int element){
     return abr;
 }
 
+T_Sommet *rechercherElement(T_Arbre abr, int element){
+    if (abr == NULL || (element >= abr->borneInf && element <= abr->borneSup)) {
+        return abr;
+    }
+
+    if (element < abr->borneInf) {
+        return rechercherElement(abr->filsGauche, element);
+    } else {
+        return rechercherElement(abr->filsDroit, element);
+    }
+}
 
 void afficherSommets(T_Arbre abr) {
     if (abr != NULL){
@@ -192,28 +205,6 @@ void afficherElements(T_Arbre abr){
         }
         afficherElements(abr->filsDroit);
     }
-}
-
-bool arbreNonVide(T_Arbre abr){
-    // bool non_vide = false;
-    // if(abr == NULL){
-    //     non_vide = false;
-    // }else{
-    //     non_vide = true;
-    // }   
-    // return non_vide;
-    return (abr != NULL);
-}
-void insertion_sommet(T_Arbre abr, T_Sommet* sommet){
-    if (sommet != NULL){
-        insertion_sommet(abr, sommet->filsGauche);
-        insertion_sommet(abr, sommet->filsDroit);
-        for (int i = sommet->borneInf; i <= sommet->borneSup; i++){
-            insererElement(abr, i);
-        }
-    }
-    
-
 }
 
 T_Arbre supprimerElement(T_Arbre abr, int element, T_Sommet* pere){
@@ -283,47 +274,6 @@ T_Arbre supprimerElement(T_Arbre abr, int element, T_Sommet* pere){
     return abr;
 }
 
-T_Sommet *rechercherElement(T_Arbre abr, int element){
-    if (abr == NULL || (element >= abr->borneInf && element <= abr->borneSup)) {
-        return abr;
-    }
-
-    if (element < abr->borneInf) {
-        return rechercherElement(abr->filsGauche, element);
-    } else {
-        return rechercherElement(abr->filsDroit, element);
-    }
-}
-
-T_Arbre choixCreationArbre(T_Arbre abr){
-    char choix_suppression;
-    int element;
-    bool creer = false;
-
-    while(choix_suppression != 'Y' && choix_suppression != 'N' && choix_suppression != 'y' && choix_suppression != 'n'){
-        printf("Un arbre existe deja, voulez vous le supprimer pour en creer un nouveau ? (Y/N)\n");
-        while (getchar() != '\n');
-        choix_suppression = getchar();
-    }
-    if(choix_suppression == 'Y' || choix_suppression == 'y'){
-        //supprimer proprement l'arbre precedent
-        libererMemoire(abr);
-        while (creer == false){
-            printf("Veuillez saisir l'element du sommet a creer\n");
-            scanf("%d", &element);
-            creer = validiteSommet(element);
-            if (creer == false){
-                printf("Vous ne pouvez construire un sommet qu'avec un element corresppondant a un nombre entier\n");
-            }
-        }
-        abr = creerSommet(element);
-     }else{
-         printf("Vous avez choisi de garder l'arbre precedent, vous pouvez utiliser les autres fonctionnalites du menu\n");
-     }
-     return abr;
-
-}
-
 void libererMemoire(T_Arbre abr){
     if (abr != NULL){
         printf("liberation du sommet [%d ; %d]\n", abr->borneInf, abr->borneSup);
@@ -348,11 +298,11 @@ size_t calculerTailleNoeud(T_Sommet* sommet) {
     if (sommet == NULL) {
         return 0;
     }
-    
+
     size_t tailleNoeud = sizeof(T_Sommet);
     tailleNoeud += calculerTailleNoeud(sommet->filsGauche);
     tailleNoeud += calculerTailleNoeud(sommet->filsDroit);
-    
+
     return tailleNoeud;
 }
 
@@ -364,26 +314,79 @@ int compterNombreElements(T_Sommet* sommet) {
     if (sommet == NULL) {
         return 0;
     }
-    
+
     int nombreTotalElements = sommet->borneSup - sommet->borneInf + 1;
     nombreTotalElements += compterNombreElements(sommet->filsGauche);
     nombreTotalElements += compterNombreElements(sommet->filsDroit);
-    
+
     return nombreTotalElements;
 }
 
-bool validiteElements(int element){
-    if(element>0 && element<200){
+T_Arbre choixCreationArbre(T_Arbre abr){
+    char choix_suppression;
+    int element;
+    bool creer = false;
+
+    while(choix_suppression != 'Y' && choix_suppression != 'N' && choix_suppression != 'y' && choix_suppression != 'n'){
+        printf("Un arbre existe deja, voulez vous le supprimer pour en creer un nouveau ? (Y/N)\n");
+        while (getchar() != '\n');
+        choix_suppression = getchar();
+    }
+    if(choix_suppression == 'Y' || choix_suppression == 'y'){
+        //supprimer proprement l'arbre precedent
+        libererMemoire(abr);
+        while (creer == false){
+            printf("Veuillez saisir l'element du sommet a creer\n");
+            while (getchar() != '\n');
+            scanf("%d", &element);
+            creer = validiteSommet(element);
+            if (creer == false){
+                printf("Vous ne pouvez construire un sommet qu'avec un element corresppondant a un nombre entier\n");
+            }
+        }
+        abr = creerSommet(element);
+     }else{
+         printf("Vous avez choisi de garder l'arbre precedent, vous pouvez utiliser les autres fonctionnalites du menu\n");
+     }
+     return abr;
+
+}
+
+void insertion_sommet(T_Arbre abr, T_Sommet* sommet){
+    if (sommet != NULL){
+        insertion_sommet(abr, sommet->filsGauche);
+        insertion_sommet(abr, sommet->filsDroit);
+        for (int i = sommet->borneInf; i <= sommet->borneSup; i++){
+            insererElement(abr, i);
+        }
+    }
+
+
+}
+
+bool arbreNonVide(T_Arbre abr){
+    bool non_vide = false;
+    if(abr == NULL){
+         non_vide = false;
+    }else{
+         non_vide = true;
+    }
+    return non_vide;
+}
+
+
+bool validiteElements(char element){
+    if(element>0){
         return true;
     }
     return false;
 }
 
-bool validiteSommet(int element){
-    
+bool validiteSommet(char element){
+
     bool creer;
     creer = true;
-    if(element>0 && element<200){
+    if(element>0){
         creer = true;
     }else{
         creer = false;
